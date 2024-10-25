@@ -10,14 +10,14 @@ from langchain_community.document_loaders import WebBaseLoader
   Estamos fazendo um webscraping do site.
 """
 
+
 def init_loader(url: str):
-  loader = WebBaseLoader(url)
-  information = loader.load()
-  # print(document_list[0].page_content) --> debuug
+    loader = WebBaseLoader(url)
+    information = loader.load()
+    # print(document_list[0].page_content) --> debuug
 
+    informations = ""
+    for info in information:
+        informations += info.page_content
 
-  informations = ""
-  for info in information:
-      informations += info.page_content
-      
-  return informations
+    return informations
