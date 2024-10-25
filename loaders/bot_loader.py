@@ -1,5 +1,6 @@
 import os
 from loaders.web_loader import init_loader
+from loaders.youtube_loader import yt_loader
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
 
@@ -36,8 +37,17 @@ def generate_bot_response(user_messages):
     chain = chat_prompt_template | language_model
 
     response = chain.invoke(
+        # Web loader
+        # {
+        #     "loader_infos": init_loader(
+        #         "https://dev.to/rutamstwt/langchain-document-loading-36j3"
+        #     ),
+        #     "input": "{input}",
+        # },
         {
-            "loader_infos": init_loader( "https://dev.to/rutamstwt/langchain-document-loading-36j3"),
+            "loader_infos": yt_loader(
+                "https://www.youtube.com/watch?v=XpR6EAVxGMg&pp=ygUHNSBkaWNhcw%3D%3D"
+            ),
             "input": "{input}",
         },
     ).content
