@@ -24,7 +24,7 @@ print("Digite 'exit' para encerrar o chat.\n")
 """
 
 
-def generate_bot_response(user_messages):
+def generate_bot_chain(user_messages):
     chat_config = [
         (
             "system",
