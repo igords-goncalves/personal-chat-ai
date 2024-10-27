@@ -1,4 +1,4 @@
-from loaders.bot_loader import generate_bot_response
+from loaders.bot_chain import generate_bot_chain
 
 
 def app():
@@ -16,8 +16,7 @@ def app():
             # break outra forma
 
         message_log.append(("user", chat_input))
-
-        response = generate_bot_response(message_log)
+        response = generate_bot_chain(message_log)
 
         message_log.append(("assistant", response))
         print(f"▲ Bot: {response}\n")
