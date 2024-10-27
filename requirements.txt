@@ -1,3 +1,5 @@
 langchain
 langchain_groq
-langchain_comunity
+langchain_community
+youtube_transcript_api
+pypdf

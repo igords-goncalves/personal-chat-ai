@@ -1,6 +1,7 @@
 import os
-from loaders.web_loader import init_loader
+from loaders.web_loader import web_loader
 from loaders.youtube_loader import yt_loader
+from loaders.pdf_loader import pdf_loader
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
 
@@ -28,7 +29,7 @@ def generate_bot_chain(user_messages):
     chat_config = [
         (
             "system",
-            "Você sempre responde de forma objetiva, e tem acesso as informações: {loader_infos}",
+            "Você sempre responde de forma objetiva, e tem acesso as informações em {loader_infos}",
         ),
         ("user", "{input}"),
     ]
@@ -39,14 +40,22 @@ def generate_bot_chain(user_messages):
     response = chain.invoke(
         # Web loader
         # {
-        #     "loader_infos": init_loader(
+        #     "loader_infos": web_loader(
         #         "https://dev.to/rutamstwt/langchain-document-loading-36j3"
         #     ),
         #     "input": "{input}",
         # },
+        # Yt Loader
+        # {
+        #     "loader_infos": yt_loader(
+        #         "https://www.youtube.com/watch?v=93vlav_LIdY&list=PLY90cjA1Q2GLJBcOJNTUjl8Z_iEglyPLZ&index=5"
+        #     ),
+        #     "input": "{input}",
+        # },
+        # Pdf loader - É necessário passar o path completo
         {
-            "loader_infos": yt_loader(
-                "https://www.youtube.com/watch?v=XpR6EAVxGMg&pp=ygUHNSBkaWNhcw%3D%3D"
+            "loader_infos": pdf_loader(
+                "C:/Users/igord/Code/chatbot-python/loaders/data/FICHA_BRASFELS.pdf"
             ),
             "input": "{input}",
         },
