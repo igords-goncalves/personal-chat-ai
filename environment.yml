@@ -11,3 +11,4 @@ dependencies:
     - langchain_community
     - youtube_transcript_api
     - pypdf
+    - dotenv
