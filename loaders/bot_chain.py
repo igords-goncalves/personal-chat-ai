@@ -1,12 +1,16 @@
 import os
+from util import chain_invoke
 from loaders.web_loader import web_loader
 from loaders.youtube_loader import yt_loader
 from loaders.pdf_loader import pdf_loader
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
 
+load_dotenv()
 
-api_key = "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"
+api_key = os.getenv("API_KEY") | "Generate a key"
+
 os.environ["GROQ_API_KEY"] = api_key
 
 language_model = ChatGroq(model="llama-3.1-70b-versatile")
@@ -26,6 +30,7 @@ print("Digite 'exit' para encerrar o chat.\n")
 
 
 def generate_bot_chain(user_messages):
+
     chat_config = [
         (
             "system",
@@ -46,19 +51,19 @@ def generate_bot_chain(user_messages):
         #     "input": "{input}",
         # },
         # Yt Loader
-        # {
-        #     "loader_infos": yt_loader(
-        #         "https://www.youtube.com/watch?v=93vlav_LIdY&list=PLY90cjA1Q2GLJBcOJNTUjl8Z_iEglyPLZ&index=5"
-        #     ),
-        #     "input": "{input}",
-        # },
-        # Pdf loader - É necessário passar o path completo
         {
-            "loader_infos": pdf_loader(
-                "C:/Users/igord/Code/chatbot-python/loaders/data/FICHA_BRASFELS.pdf"
+            "loader_infos": yt_loader(
+                "https://www.youtube.com/watch?v=93vlav_LIdY&list=PLY90cjA1Q2GLJBcOJNTUjl8Z_iEglyPLZ&index=5"
             ),
             "input": "{input}",
         },
+        # Pdf loader - É necessário passar o path completo
+        # {
+        #     "loader_infos": pdf_loader(
+        #         "C:/Users/igord/Code/chatbot-python/loaders/ex-data/FICHA_BRASFELS.pdf"
+        #     ),
+        #     "input": "{input}",
+        # },
     ).content
 
     return response
