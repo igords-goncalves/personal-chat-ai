@@ -3,19 +3,28 @@ from loaders.bot_chain import generate_bot_chain
 
 def app():
     message_log = []
-    chat = True
+    chatting = True
 
-    # while True:
-    while chat:
+#     menu = """Pergunte o que quiser ou digite:\n
+# 1 - Análise de vídeos do Youtube 
+# 2 - Análise de documentos em PDF 
+# 3 - Web scramping\n
+# >>> """
+
+#     user_selection = input(menu)
+
+    while chatting:
         chat_input = input("★ Usuario: ")
 
         finish_chat = chat_input.lower() == "exit"
 
         if finish_chat:
-            chat = False
-            # break outra forma
+            chatting = False
 
+        # Concatena o input e resposta em uma tupla
         message_log.append(("user", chat_input))
+
+        # Reposta do bot
         response = generate_bot_chain(message_log)
 
         message_log.append(("assistant", response))

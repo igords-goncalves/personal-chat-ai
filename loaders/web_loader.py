@@ -21,4 +21,3 @@ def web_loader(url: str):
         web_info += info.page_content
 
     return web_info
-    

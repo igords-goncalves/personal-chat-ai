@@ -9,11 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.getenv("API_KEY") | "Generate a key"
-
-os.environ["GROQ_API_KEY"] = api_key
-
-language_model = ChatGroq(model="llama-3.1-70b-versatile")
+os.environ["GROQ_API_KEY"] = os.getenv("API_KEY")
 
 print("Digite 'exit' para encerrar o chat.\n")
 
@@ -30,6 +26,7 @@ print("Digite 'exit' para encerrar o chat.\n")
 
 
 def generate_bot_chain(user_messages):
+    language_model = ChatGroq(model="llama-3.1-70b-versatile")
 
     chat_config = [
         (
@@ -43,6 +40,11 @@ def generate_bot_chain(user_messages):
     chain = chat_prompt_template | language_model
 
     response = chain.invoke(
+        # Bot loader
+        {
+            "loader_infos": "",
+            "input": "{input}",
+        },
         # Web loader
         # {
         #     "loader_infos": web_loader(
@@ -51,12 +53,12 @@ def generate_bot_chain(user_messages):
         #     "input": "{input}",
         # },
         # Yt Loader
-        {
-            "loader_infos": yt_loader(
-                "https://www.youtube.com/watch?v=93vlav_LIdY&list=PLY90cjA1Q2GLJBcOJNTUjl8Z_iEglyPLZ&index=5"
-            ),
-            "input": "{input}",
-        },
+        # {
+        #     "loader_infos": yt_loader(
+        #         "https://www.youtube.com/watch?v=93vlav_LIdY&list=PLY90cjA1Q2GLJBcOJNTUjl8Z_iEglyPLZ&index=5"
+        #     ),
+        #     "input": "{input}",
+        # },
         # Pdf loader - É necessário passar o path completo
         # {
         #     "loader_infos": pdf_loader(
