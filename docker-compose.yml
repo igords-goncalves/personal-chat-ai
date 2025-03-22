@@ -1,0 +1,8 @@
+services:
+  python:
+    build: .
+    container_name: pybot
+    env_file:
+      - ./.env
+    stdin_open: true
+    tty: true
