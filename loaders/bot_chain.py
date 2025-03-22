@@ -26,7 +26,7 @@ print("Digite 'exit' para encerrar o chat.\n")
 
 
 def generate_bot_chain(user_messages):
-    language_model = ChatGroq(model="llama-3.1-70b-versatile")
+    language_model = ChatGroq(model="deepseek-r1-distill-qwen-32b")
 
     chat_config = [
         (
