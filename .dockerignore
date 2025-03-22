@@ -2,9 +2,6 @@
 **/__pycache__/
 **/ex-data
 *.env
-Dockerfile*
-docker-compose*
-.dockerignore
 .git
 .gitignore
 README.md

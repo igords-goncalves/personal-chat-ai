@@ -6,3 +6,4 @@ services:
       - ./.env
     stdin_open: true
     tty: true
+    
